@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="helpers.xml">
+
+	<!-- ======================================================================== -->
+	<!-- Helper Properties -->
+	<!-- ======================================================================== -->
+	<property name="tree.json.filename" value="tree.json" />
+	<property name="build.path" value="." />
+	<property name="build.json.path" value="${build.path}/${tree.json.filename}" />
+
+	<!-- ======================================================================== -->
+	<!-- The Main Build Targets -->
+	<!-- ======================================================================== -->
+
+	<!-- Setup -->
+	<!-- =====-->
+	<!-- Delete existing tree file -->
+	<target name="delete.tree.json">
+		<if>
+			<available file="${build.json.path}" />
+			<then>
+				<echo level="info">Removing (old) ${build.json.path}</echo>
+				<delete file="${build.json.path}" />
+			</then>
+		</if>
+	</target>
+
+
+	<!-- Create new tree file -->
+	<target name="create.tree.json">
+		<touch file="${build.json.path}" />
+	</target>
+
+
+	<!-- Build -->
+	<!-- ===== -->
+	<!-- Base Case (and recursively add subdirectories/files) -->
+	<target name="build.base">
+		<count.pdfs.and.subdirs base.dir="${content.root}" />
+		<write.to.json base.dir="${content.root}" no.pdf="${count.pdf}" no.subdirs="${temp.dir.count}" start.json="[" end.json="]" />
+	</target>
+
+
+	<!-- Move the new built tree file to where its needed -->
+	<target name="copy.to.correct.location">
+		<copy file="${build.json.path}" tofile="${end.location}" overwrite="true" />
+	</target>
+
+	<!-- ======================================================================== -->
+	<!--  Helper Macros -->
+	<!-- ======================================================================== -->
+	
+	<!-- Count #pdfs and #base.dirs -->
+	<macrodef name="count.pdfs.and.subdirs">
+		<attribute name="base.dir" />
+		
+		<sequential>
+			<!-- Reference -->
+			<fileset id="pdf.ref" dir="@{base.dir}" includes="*.pdf" />
+			<dirset id="base.dir.ref" dir="@{base.dir}" includes="*" />
+			
+			<!-- Count -->
+			<var name="count.pdf" unset="true" /> <!-- we don't want to forget the subdirs count -->
+			<resourcecount property="count.pdf" refid="pdf.ref" />
+			<resourcecount property="@{base.dir}.count.subdirs" refid="base.dir.ref" />
+			
+			<!-- IMPORTANT: Update temp.count.dir and information -->
+			<var name="temp.dir.count" unset="true" />
+			<propertycopy property="temp.dir.count" from="@{base.dir}.count.subdirs" />
+			
+		</sequential>
+	</macrodef>
+
+
+	<!-- Recursive Macro, that does the actual writing of the tree -->
+	<macrodef name="write.to.json">
+		<attribute name="parent.of.base.dir" default="" />
+		<attribute name="base.dir" />
+		<attribute name="no.pdf" />
+		<attribute name="no.subdirs" />
+		<attribute name="start.json" />
+		<attribute name="end.json" />
+
+		<sequential>
+
+			<!-- Setup pdf/dir index for correct JSON syntax (no , on last entry) -->
+			<var name="pdf.index" value="0" />
+			<var name="@{base.dir}.subdirs.index" value="0" />
+
+			<!-- If something exists -->
+			<if>
+				<not>
+					<and>
+						<equals arg1="@{no.pdf}" arg2="0" />
+						<equals arg1="@{no.subdirs}" arg2="0" />
+					</and>
+				</not>
+				<then>
+
+					<!-- Start JSON -->
+					<concat append="true" destfile="${build.json.path}">@{start.json}${line.separator}</concat>
+
+					<!-- Append PDF's -->
+					<!-- If children PDF's and directories exist, do add a comma for the last pdf entry -->
+					<if>
+                		                <and>
+                                		        <not>
+	                                                	<equals arg1="@{no.pdf}" arg2="0" />
+							</not>
+							<not>
+		                                                <equals arg1="@{no.subdirs}" arg2="0" />
+	        	                                </not>
+        	        	                </and>
+						<then>
+							<var name="no.pdf.update" unset="true" />
+							<math result="no.pdf.update" operand1="@{no.pdf}" operation="+" operand2="1" datatype="int" />
+						</then>
+						<else>
+							<var name="no.pdf.update" unset="true" />
+							<property name="no.pdf.update" value="@{no.pdf}" />
+						</else>
+					</if>
+
+					<!-- Sort pdf's alphanumerically before looping through - outputs ${sorted.filset} -->
+					<sort.fileset fileset.base.dir="@{base.dir}" />
+					<for param="file" list="${sorted.fileset}" delimiter="${line.separator}">
+						<sequential>
+							<math result="pdf.index" operand1="${pdf.index}" operation="+" operand2="1" datatype="int" />
+							<append.pdf file="@{file}" count="${pdf.index}" list.length="${no.pdf.update}" />
+						</sequential>
+					</for>
+
+					<!-- Append and recurse Dir's -->
+					<for param="sub.dir">
+						<path>
+							<dirset dir="@{base.dir}" includes="*" />
+						</path>
+						<sequential>
+
+							<!-- Iterate base.dir index (also updates parent.base.dir for use in the main "else" statement) -->
+							<var name="base.dir.index" unset="true" />
+							<var name="base.dir.index2" unset="true" />
+							<propertycopy property="base.dir.index" from="@{base.dir}.subdirs.index" />
+							<math result="base.dir.index2" operand1="${base.dir.index}" operation="+" operand2="1" datatype="int" />
+							<var name="@{base.dir}.subdirs.index" unset="true" />
+							<propertycopy property="@{base.dir}.subdirs.index" from="base.dir.index2" />
+							<echo level="verbose">FOR THE RECORD: @{base.dir}.subdirs.index=${base.dir.index2}</echo>
+
+							<!-- Get dirname -->
+							<get.dirname dir.path="@{sub.dir}" />
+
+							<!-- Count pdfs and subdirectories for the subdirectory -->
+							<count.pdfs.and.subdirs base.dir="@{sub.dir}" />
+
+							<!-- If there are no children (pdf's or dirs) within the subdirectory, allow it to be empty -->
+							<if>
+								<and>
+									<equals arg1="${count.pdf}" arg2="0" />
+									<equals arg1="${base.dir.index2}" arg2="0" />
+								</and>
+								<then>
+									<var name="children.start" value="" />
+									<var name="children.end" value="" />
+								</then>
+								<else>
+									<var name="children.start" value=", &quot;branch&quot;: [" />
+									<var name="children.end" value="]" />
+								</else>
+							</if>
+
+							<!-- If we're at the content path level, expand the folders by default -->
+							<var name="expand.folder" unset="true" />
+							<condition property="expand.folder" value="true" else="false">
+								<equals arg1="@{base.dir}" arg2="${contentpath}" />
+							</condition>
+
+							<if>
+								<equals arg1="@{no.subdirs}" arg2="${base.dir.index2}" />
+								<then>
+									<write.to.json parent.of.base.dir="@{base.dir}" base.dir="@{sub.dir}" no.pdf="${count.pdf}" no.subdirs="${temp.dir.count}" start.json="{&quot;id&quot;:&quot;FOLDER&quot;, &quot;label&quot;:&quot;${dirname}&quot;, &quot;inode&quot;:true, &quot;open&quot;:${expand.folder}, &quot;icon&quot;:&quot;folder&quot;${children.start}" end.json="${children.end}${line.separator}}${line.separator}" />
+								</then>
+								<else>
+									<write.to.json parent.of.base.dir="@{base.dir}" base.dir="@{sub.dir}" no.pdf="${count.pdf}" no.subdirs="${temp.dir.count}" start.json="{&quot;id&quot;:&quot;FOLDER&quot;, &quot;label&quot;:&quot;${dirname}&quot;, &quot;inode&quot;:true, &quot;open&quot;:${expand.folder}, &quot;icon&quot;:&quot;folder&quot;${children.start}" end.json="${children.end}${line.separator}},${line.separator}" />
+								</else>
+
+							</if>
+
+						</sequential>
+					</for>
+					<concat append="true" destfile="${build.json.path}">@{end.json}${line.separator}</concat>
+				</then>
+
+				<!-- If nothing exists within a directory, just add the dir name (a base case) -->
+				<else>
+					<get.dirname dir.path="@{base.dir}" />
+
+					<!-- Set parent count -->
+					<var name="parent.of.base.dir.count.subdirs" unset="true" />
+					<propertycopy property="parent.of.base.dir.count.subdirs" from="@{parent.of.base.dir}.count.subdirs" />
+
+					<!-- Concat base.dir -->
+					<!-- Don't add comma if it's the last one-->
+					<echo level="verbose">EMPTY DIR: parent.index=${base.dir.index2} and @{parent.of.base.dir}.count.subdirs=${parent.of.base.dir.count.subdirs}</echo>
+					<if>
+						<equals arg1="${base.dir.index2}" arg2="${parent.of.base.dir.count.subdirs}" />
+						<then>
+							<concat append="true" destfile="${build.json.path}">{&quot;id&quot;:&quot;FOLDER&quot;, &quot;label&quot;:&quot;${dirname}&quot;, &quot;inode&quot;:true, &quot;open&quot;:false, &quot;icon&quot;:&quot;folder&quot;}${line.separator}</concat>
+						</then>
+						<else>
+							<concat append="true" destfile="${build.json.path}">{&quot;id&quot;:&quot;FOLDER&quot;, &quot;label&quot;:&quot;${dirname}&quot;, &quot;inode&quot;:true, &quot;open&quot;:false, &quot;icon&quot;:&quot;folder&quot;},${line.separator}</concat>
+						</else>
+					</if>
+
+				</else>
+			</if>
+		</sequential>
+	</macrodef>
+
+
+	<!-- Deal with PDFs -->
+	<macrodef name="append.pdf">
+		<attribute name="file" />
+		<attribute name="count" />
+		<attribute name="list.length" />
+		<sequential>
+
+			<!-- Forgot some properties -->
+			<var name="filename_.pdf" unset="true" />
+			<var name="filename_" unset="true" />
+			<var name="filename" unset="true" />
+			<var name="filepath/" unset="true" />
+			<var name="filepath" unset="true" />
+
+			<!-- Get just the filename (not full path) and remove web root from filepath -->
+			<basename property="filename_.pdf" file="@{file}" />
+			<propertyregex property="filepath/" input="@{file}" regexp="${content.root}" replace="" casesensitive="false" />
+
+			<!-- Remove ".pdf" from filename -->
+			<propertyregex property="filename_" input="${filename_.pdf}" regexp=".pdf" replace="" casesensitive="false" />
+			<!-- Change / for & in filepath to prevent URL / issues -->
+			<propertyregex property="filepath" input="${filepath/}" regexp="/" replace="&amp;" casesensitive="false" />
+
+			<!-- Change _ (underscores for spaces) in filename, if _'s exist, otherwise rename property  -->
+			<if>
+				<contains string="${filename_}" substring="_" />
+				<then>
+					<propertyregex property="filename" input="${filename_}" regexp="_" replace=" " casesensitive="false" />
+				</then>
+				<else>
+					<propertycopy name="filename" from="filename_" />
+				</else>
+			</if>
+
+			<!-- Concat PDF-->
+			<!-- Don't add comma if it's the last pdf -->
+			<if>
+				<equals arg1="@{list.length}" arg2="@{count}" />
+				<then>
+					<concat append="true" destfile="${build.json.path}">{"id":"${filepath}", "label":"${filename}", "inode":false, "icon":"file"}${line.separator}</concat>
+				</then>
+				<else>
+					<concat append="true" destfile="${build.json.path}">{"id":"${filepath}", "label":"${filename}", "inode":false, "icon":"file"},${line.separator}</concat>
+				</else>
+
+			</if>
+		</sequential>
+	</macrodef>
+
+
+	<!-- Deal with directories -->
+	<macrodef name="get.dirname">
+		<attribute name="dir.path" />
+
+		<sequential>
+
+			<!-- Forgot some properties -->
+			<var name="dirname_" unset="true" />
+			<var name="dirname" unset="true" />
+
+			<!-- Get just the directory name (not full path) -->
+			<basename property="dirname_" file="@{dir.path}" />
+
+			<!-- Change _ (underscores for spaces), otherwise rename property as required  -->
+			<if>
+				<contains string="${dirname_}" substring="_" />
+				<then>
+					<propertyregex property="dirname" input="${dirname_}" regexp="_" replace=" " casesensitive="false" />
+				</then>
+				<else>
+					<propertycopy name="dirname" from="dirname_" />
+				</else>
+			</if>
+
+		</sequential>
+	</macrodef>
+
+
+	<!-- Sort PDFs alphanumerically before looping through - outputs ${sorted.filset} -->
+	<macrodef name="sort.fileset">
+		<attribute name="fileset.base.dir" />
+		<sequential>
+			<!-- define fileset -->
+			<fileset id="fileset.id" dir="@{fileset.base.dir}" includes="*.pdf" />
+			<var name="fileset.files" unset="true" />
+			<pathconvert pathsep="${line.separator}" property="fileset.files" refid="fileset.id" />
+			<echo file="temp.txt">${fileset.files}</echo>
+
+			<!-- sort filset -->
+			<exec executable="sort">
+				<arg value="-V" />			
+				<arg value="temp.txt" />
+				<arg value="--output=temp.txt" />
+			</exec>
+			
+			<!-- load sorted fileset, and loop through -->
+			<var name="sorted.fileset" unset="true" />
+			<loadfile property="sorted.fileset" srcfile="temp.txt"/>
+		</sequential>
+	</macrodef>
+</project>
