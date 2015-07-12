@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="build_tree.json" basedir="../" default="job">
+
+	<!-- Use ant contrib -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+	<!-- ======================================================================== -->
+	<!-- Source Properties -->
+	<property name="content.root" value="content" />
+	<property name="end.location" value="web/json/toc.json" />
+
+	
+	<!-- Load Helper Library -->
+	<loadproperties>
+		<url baseUrl="http://andyandy1992.github.io/aciTree_AntBuild/" 
+         relativePath="build.json_helpers.xml"/>
+	</loadproperties>
+
+	<!-- The main build targets -->
+	<target name="job" depends="setup,build,tidy" />
+
+	<target name="setup" depends="delete.tree.json,create.tree.json" />
+	<target name="build" depends="build.base" />
+	<target name="tidy" depends="copy.to.correct.location,delete.temp.file" />
+
+</project>

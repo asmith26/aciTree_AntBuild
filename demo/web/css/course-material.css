@@ -1,0 +1,94 @@
+/*Removes any inital annoying padding and margin*/
+*{margin:0;padding:0;font-family:'Lato','sans-serif'}
+/*WHOLE PAGE*/
+body{background-color:#ccddff}
+/*by element*/
+a:link{color:#282828;}    /* unvisited link */
+a:visited{color:#680000;} /* visited link */
+a:hover{color:#A0A0A0;}   /* mouse over link */
+p,ul,li{font-size:12pt;}
+input[type=text],input[type=password],textarea{
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+  box-shadow:5px 5px 5px #888888
+}
+input[type=text]:focus,input[type=password]:focus,textarea:focus{
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+/* FOR USER COMMENTS?
+input[type=submit]{
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  padding: 3px 0px 3px 3px;
+  border: 1px solid #DDDDDD;
+  font-size:100%;
+  background-color:#CCFF99;
+  box-shadow:5px 5px 5px #888888
+}
+input[type=submit]:hover{
+  background-color:#FFFF99;
+  cursor: pointer; 
+}*/
+/*by id*/
+#tocbar{margin-left:10px;margin-top:50px;width:305px;float:left;position:absolute;display:block}
+/*CONTENT*/
+#courseMaterial{margin-left:350px;margin-top:50px;width:910px;height:100%;float:right;position:absolute;}
+/*TOP NAVIGATION*/
+#homenav{margin-top:8px;margin-left:300px;width:950px}
+#homenav ul li{
+	float:left;
+	display:inline;
+	list-style-type:none;
+	margin-right:10px;
+	background-color:#88AAFF;
+	padding:8px 16px 8px 16px;
+	transition:all .5s;
+	-webkit-border-radius:5%;
+	-moz-border-radius: 5%;
+	border-radius: 5%;
+	font-size:10pt;
+}
+#homenav ul a{
+	text-decoration:none;
+	color:white;
+}
+#homenav ul li:hover {
+	background-color:#88CCFF;
+	color:white;
+	padding:8px 24px 8px 24px;	
+	transition:all .5s;
+	-webkit-border-radius: 5%;
+	-moz-border-radius: 5%;
+	border-radius: 5%;
+}
+/*by class*/
+/*TABLE OF CONTENTS - majority of css properties in acidTree.css*/
+.aciTree {
+    width:100%;
+    height:700px;
+    overflow:auto;
+    padding:10px;
+    border:1px solid #ccc;
+    float:left;
+    margin:0 20px 20px 0;
+}
+/*Highlight Search Filtered results - sort by file
+.aciTree .aciTreeLi.aciTreeHidden {
+    display:block;
+    background-color:#ccc;
+}
+.aciTree .aciTreeLi.aciTreeHidden .aciTreeLine {
+    background:none !important;
+}
+*/

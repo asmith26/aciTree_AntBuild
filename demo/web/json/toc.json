@@ -1,0 +1,256 @@
+[
+{"id":"FOLDER", "label":"Coursera", "inode":true, "open":true, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Introduction to Logic", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Images", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"Machine Learning", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Images", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Week 2", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"Neural Networks for Machine Learning", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Images", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"Other", "inode":true, "open":true, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Nand2Tetris", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"/home/andyandy/Desktop/Git/MyMOOCs/courses/Other/Nand2Tetris/DraftNotes.pdf", "label":"DraftNotes", "inode":false, "icon":"file"},
+{"id":"FOLDER", "label":"Code", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"BuiltInChipsSource", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"BuiltInVMCodeSource", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"CompilersPackageSource", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Hack", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Assembler", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"VirtualMachine", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"HackGUIPackageSource", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"HackGUI", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"HackPackageSource", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Hack", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"ComputerParts", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Controller", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Events", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Translators", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Utilities", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"InstallDir", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"OS", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"bin", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"classes", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"help", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"images", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"lib", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"scripts", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"builtInChips", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"builtInVMCode", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"MainClassesSource", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"SimulatorsGUIPackageSource", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"SimulatorsGUI", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"SimulatorsPackageSource", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Hack", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"CPUEmulator", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Gates", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"HardwareSimulator", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"VMEmulator", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"Sotware", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"/home/andyandy/Desktop/Git/MyMOOCs/courses/Other/Nand2Tetris/Code/Sotware/Assembler Tutorial.pdf", "label":"Assembler Tutorial", "inode":false, "icon":"file"},
+{"id":"/home/andyandy/Desktop/Git/MyMOOCs/courses/Other/Nand2Tetris/Code/Sotware/CPU Emulator Tutorial.pdf", "label":"CPU Emulator Tutorial", "inode":false, "icon":"file"},
+{"id":"/home/andyandy/Desktop/Git/MyMOOCs/courses/Other/Nand2Tetris/Code/Sotware/Hardware Simulator Tutorial.pdf", "label":"Hardware Simulator Tutorial", "inode":false, "icon":"file"},
+{"id":"/home/andyandy/Desktop/Git/MyMOOCs/courses/Other/Nand2Tetris/Code/Sotware/VM Emulator Tutorial.pdf", "label":"VM Emulator Tutorial", "inode":false, "icon":"file"}
+]
+},
+
+{"id":"FOLDER", "label":"nand2tetris", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"projects", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"00", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"01", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"02", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"03", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"a", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"b", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"04", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"fill", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"mult", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"05", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"06", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"add", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"max", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"pong", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"rect", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"07", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"MemoryAccess", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"BasicTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"PointerTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"StaticTest", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"StackArithmetic", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"SimpleAdd", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"StackTest", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"08", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"FunctionCalls", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"FibonacciElement", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"SimpleFunction", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"StaticsTest", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"ProgramFlow", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"BasicLoop", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"FibonacciSeries", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"09", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"/home/andyandy/Desktop/Git/MyMOOCs/courses/Other/Nand2Tetris/Code/nand2tetris/projects/09/Jack OS API.pdf", "label":"Jack OS API", "inode":false, "icon":"file"},
+{"id":"FOLDER", "label":"Square", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"10", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"ArrayTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"ExpressionlessSquare", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Square", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"11", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Average", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"ComplexArrays", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"ConvertToBin", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Pong", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Seven", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"Square", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"12", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"ArrayTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"KeyboardTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"MathTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"MemoryTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"OutputTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"ScreenTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"StringTest", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"SysTest", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"13", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"tools", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"OS", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"bin", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"classes", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"help", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"images", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"lib", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"scripts", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"builtInChips", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"builtInVMCode", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"Images", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"1 Boolean Logic", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"2 Boolean Arithemtic", "inode":true, "open":false, "icon":"folder"},
+{"id":"FOLDER", "label":"3 Sequential Logic", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"Udacity", "inode":true, "open":true, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Design of Computer Programs", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Images", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"Intro to Artificial Intelligence", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"FOLDER", "label":"Images", "inode":true, "open":false, "icon":"folder"}
+]
+},
+
+{"id":"FOLDER", "label":"Intro to Computer Science", "inode":true, "open":false, "icon":"folder", "branch": [
+{"id":"/home/andyandy/Desktop/Git/MyMOOCs/courses/Udacity/Intro_to_Computer_Science/Intro_to_Computer_Science.certificate.pdf", "label":"Intro to Computer Science.certificate", "inode":false, "icon":"file"},
+{"id":"FOLDER", "label":"Images", "inode":true, "open":false, "icon":"folder"}
+]
+}
+
+]
+},
+
+{"id":"FOLDER", "label":"edX", "inode":true, "open":false, "icon":"folder"}
+]

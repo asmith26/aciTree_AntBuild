@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="helpers.xml">
 
-	<!-- ======================================================================== -->
+	<!-- ================= -->
 	<!-- Helper Properties -->
-	<!-- ======================================================================== -->
+	<!-- ================= -->
 	<property name="tree.json.filename" value="tree.json" />
-	<property name="build.path" value="." />
+	<property name="build.path" value="build" />
 	<property name="build.json.path" value="${build.path}/${tree.json.filename}" />
+	<property name="temp.file" value="${build.path}/temp.txt" />
 
-	<!-- ======================================================================== -->
+	<!-- ====================== -->
 	<!-- The Main Build Targets -->
-	<!-- ======================================================================== -->
+	<!-- ====================== -->
 
 	<!-- Setup -->
 	<!-- =====-->
 	<!-- Delete existing tree file -->
 	<target name="delete.tree.json">
-		<if>
-			<available file="${build.json.path}" />
-			<then>
-				<echo level="info">Removing (old) ${build.json.path}</echo>
-				<delete file="${build.json.path}" />
-			</then>
-		</if>
+		<clean.file file="${build.json.path}" />
 	</target>
 
 
@@ -41,15 +36,36 @@
 	</target>
 
 
+	<!-- Tidy -->
 	<!-- Move the new built tree file to where its needed -->
 	<target name="copy.to.correct.location">
 		<copy file="${build.json.path}" tofile="${end.location}" overwrite="true" />
 	</target>
 
-	<!-- ======================================================================== -->
+	<!-- Delete ${temp.file} -->
+	<target name="delete.temp.file">
+		<clean.file file="${temp.file}" />
+	</target>
+
+	<!-- ============== -->
 	<!--  Helper Macros -->
-	<!-- ======================================================================== -->
-	
+	<!-- ============== -->
+
+	<!-- Delete 1 file -->
+	<macrodef name="clean.file">
+		<attribute name="file" />
+		
+		<sequential>
+			<if>
+				<available file="@{file}" />
+				<then>
+					<echo level="info">Removing (old) @{file}</echo>
+					<delete file="@{file}" />
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
 	<!-- Count #pdfs and #base.dirs -->
 	<macrodef name="count.pdfs.and.subdirs">
 		<attribute name="base.dir" />
@@ -168,10 +184,10 @@
 								</else>
 							</if>
 
-							<!-- If we're at the content path level, expand the folders by default -->
+							<!-- If we're at the content root level, expand the folders by default -->
 							<var name="expand.folder" unset="true" />
 							<condition property="expand.folder" value="true" else="false">
-								<equals arg1="@{base.dir}" arg2="${contentpath}" />
+								<equals arg1="@{base.dir}" arg2="${content.root}" />
 							</condition>
 
 							<if>
@@ -216,8 +232,8 @@
 		</sequential>
 	</macrodef>
 
+	<!-- Deal with PDFs and directories -->
 
-	<!-- Deal with PDFs -->
 	<macrodef name="append.pdf">
 		<attribute name="file" />
 		<attribute name="count" />
@@ -228,19 +244,22 @@
 			<var name="filename_.pdf" unset="true" />
 			<var name="filename_" unset="true" />
 			<var name="filename" unset="true" />
-			<var name="filepath/" unset="true" />
-			<var name="filepath" unset="true" />
+			<!--var name="filepath" unset="true" /-->
+			<!--var name="filepath/" unset="true" /-->
 
 			<!-- Get just the filename (not full path) and remove web root from filepath -->
 			<basename property="filename_.pdf" file="@{file}" />
-			<propertyregex property="filepath/" input="@{file}" regexp="${content.root}" replace="" casesensitive="false" />
+
+			<!-- Remove web root from filepath -->
+			<!--propertyregex property="filepath" input="@{file}" regexp="${basedir}" replace="" casesensitive="false" /-->
+			<!--propertyregex property="filepath/" input="@{file}" regexp="${basedir}" replace="" casesensitive="false" /-->
+			<!-- Change / for & in filepath to prevent URL / issues -->
+			<!--propertyregex property="filepath" input="${filepath/}" regexp="/" replace="&amp;" casesensitive="false" /-->
 
 			<!-- Remove ".pdf" from filename -->
 			<propertyregex property="filename_" input="${filename_.pdf}" regexp=".pdf" replace="" casesensitive="false" />
-			<!-- Change / for & in filepath to prevent URL / issues -->
-			<propertyregex property="filepath" input="${filepath/}" regexp="/" replace="&amp;" casesensitive="false" />
 
-			<!-- Change _ (underscores for spaces) in filename, if _'s exist, otherwise rename property  -->
+			<!-- Change _ (underscores for spaces) in filename, if _'s exist, otherwise rename property -->
 			<if>
 				<contains string="${filename_}" substring="_" />
 				<then>
@@ -256,18 +275,16 @@
 			<if>
 				<equals arg1="@{list.length}" arg2="@{count}" />
 				<then>
-					<concat append="true" destfile="${build.json.path}">{"id":"${filepath}", "label":"${filename}", "inode":false, "icon":"file"}${line.separator}</concat>
+					<concat append="true" destfile="${build.json.path}">{"id":"@{file}", "label":"${filename}", "inode":false, "icon":"file"}${line.separator}</concat>
 				</then>
 				<else>
-					<concat append="true" destfile="${build.json.path}">{"id":"${filepath}", "label":"${filename}", "inode":false, "icon":"file"},${line.separator}</concat>
+					<concat append="true" destfile="${build.json.path}">{"id":"@{file}", "label":"${filename}", "inode":false, "icon":"file"},${line.separator}</concat>
 				</else>
 
 			</if>
 		</sequential>
 	</macrodef>
 
-
-	<!-- Deal with directories -->
 	<macrodef name="get.dirname">
 		<attribute name="dir.path" />
 
@@ -295,7 +312,7 @@
 	</macrodef>
 
 
-	<!-- Sort PDFs alphanumerically before looping through - outputs ${sorted.filset} -->
+	<!-- Sort pdf's alphanumerically before looping through - outputs ${sorted.filset} -->
 	<macrodef name="sort.fileset">
 		<attribute name="fileset.base.dir" />
 		<sequential>
@@ -303,18 +320,20 @@
 			<fileset id="fileset.id" dir="@{fileset.base.dir}" includes="*.pdf" />
 			<var name="fileset.files" unset="true" />
 			<pathconvert pathsep="${line.separator}" property="fileset.files" refid="fileset.id" />
-			<echo file="temp.txt">${fileset.files}</echo>
+			<echo file="${temp.file}">${fileset.files}</echo>
 
 			<!-- sort filset -->
 			<exec executable="sort">
 				<arg value="-V" />			
-				<arg value="temp.txt" />
-				<arg value="--output=temp.txt" />
+				<arg value="${temp.file}" />
+				<arg value="--output=${temp.file}" />
 			</exec>
 			
 			<!-- load sorted fileset, and loop through -->
 			<var name="sorted.fileset" unset="true" />
-			<loadfile property="sorted.fileset" srcfile="temp.txt"/>
+			<loadfile property="sorted.fileset" srcfile="${temp.file}"/>
 		</sequential>
 	</macrodef>
+	
+	
 </project>
