@@ -24,22 +24,6 @@ input[type=text]:focus,input[type=password]:focus,textarea:focus{
   margin: 5px 1px 3px 0px;
   border: 1px solid rgba(81, 203, 238, 1);
 }
-/* FOR USER COMMENTS?
-input[type=submit]{
-  -webkit-transition: all 0.30s ease-in-out;
-  -moz-transition: all 0.30s ease-in-out;
-  -ms-transition: all 0.30s ease-in-out;
-  -o-transition: all 0.30s ease-in-out;
-  padding: 3px 0px 3px 3px;
-  border: 1px solid #DDDDDD;
-  font-size:100%;
-  background-color:#CCFF99;
-  box-shadow:5px 5px 5px #888888
-}
-input[type=submit]:hover{
-  background-color:#FFFF99;
-  cursor: pointer; 
-}*/
 /*by id*/
 #tocbar{margin-left:10px;margin-top:50px;width:305px;float:left;position:absolute;display:block}
 /*CONTENT*/
@@ -83,12 +67,3 @@ input[type=submit]:hover{
     float:left;
     margin:0 20px 20px 0;
 }
-/*Highlight Search Filtered results - sort by file
-.aciTree .aciTreeLi.aciTreeHidden {
-    display:block;
-    background-color:#ccc;
-}
-.aciTree .aciTreeLi.aciTreeHidden .aciTreeLine {
-    background:none !important;
-}
-*/

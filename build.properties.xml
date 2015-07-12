@@ -10,13 +10,8 @@
 	<property name="end.location" value="EDIT" />
 
 	
-
-	<!-- Load Helper Library -->
-	<loadproperties>
-		<url baseUrl="http://andyandy1992.github.io/aciTree_AntBuild/" 
-         relativePath="build.json_helpers.xml"/>
-	</loadproperties>
-
+	<!-- Import Helper Script -->
+	<import file="./build.json_helpers.xml" />
 
 	<!-- The main build targets -->
 	<target name="job" depends="setup,build,tidy" />
