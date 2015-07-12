@@ -251,7 +251,7 @@
 			<basename property="filename_.pdf" file="@{file}" />
 
 			<!-- Remove web root from filepath -->
-			<!--propertyregex property="filepath" input="@{file}" regexp="${basedir}" replace="" casesensitive="false" /-->
+			<propertyregex property="filepath" input="@{file}" regexp="${basedir}" replace="" casesensitive="false" />
 			<!--propertyregex property="filepath/" input="@{file}" regexp="${basedir}" replace="" casesensitive="false" /-->
 			<!-- Change / for & in filepath to prevent URL / issues -->
 			<!--propertyregex property="filepath" input="${filepath/}" regexp="/" replace="&amp;" casesensitive="false" /-->
@@ -275,10 +275,10 @@
 			<if>
 				<equals arg1="@{list.length}" arg2="@{count}" />
 				<then>
-					<concat append="true" destfile="${build.json.path}">{"id":"@{file}", "label":"${filename}", "inode":false, "icon":"file"}${line.separator}</concat>
+					<concat append="true" destfile="${build.json.path}">{"id":"${filepath}", "label":"${filename}", "inode":false, "icon":"file"}${line.separator}</concat>
 				</then>
 				<else>
-					<concat append="true" destfile="${build.json.path}">{"id":"@{file}", "label":"${filename}", "inode":false, "icon":"file"},${line.separator}</concat>
+					<concat append="true" destfile="${build.json.path}">{"id":"${filepath}", "label":"${filename}", "inode":false, "icon":"file"},${line.separator}</concat>
 				</else>
 
 			</if>

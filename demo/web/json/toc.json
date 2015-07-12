@@ -1,8 +1,8 @@
 [
 {"id":"FOLDER", "label":"No Content", "inode":true, "open":false, "icon":"folder"},
 {"id":"FOLDER", "label":"Some Content", "inode":true, "open":true, "icon":"folder", "branch": [
-{"id":"/home/andyandy/Desktop/Git/aciTree_AntBuild/demo/content/Some_Content/PDF1.pdf", "label":"PDF1", "inode":false, "icon":"file"},
-{"id":"/home/andyandy/Desktop/Git/aciTree_AntBuild/demo/content/Some_Content/PDF2.pdf", "label":"PDF2", "inode":false, "icon":"file"}
+{"id":"/content/Some_Content/PDF1.pdf", "label":"PDF1", "inode":false, "icon":"file"},
+{"id":"/content/Some_Content/PDF1.pdf", "label":"PDF2", "inode":false, "icon":"file"}
 ]
 }
 
