@@ -11,7 +11,7 @@
 
 	
 	<!-- Import Helper Script -->
-	<import file="./build.json_helpers.xml" />
+	<import file="./build.json_helpers_v1.0.xml" />
 
 	<!-- The main build targets -->
 	<target name="job" depends="setup,build,tidy" />

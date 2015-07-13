@@ -251,7 +251,7 @@
 			<basename property="filename_.pdf" file="@{file}" />
 
 			<!-- Remove web root from filepath -->
-			<propertyregex property="filepath" input="@{file}" regexp="${basedir}" replace="" casesensitive="false" />
+			<propertyregex property="filepath" input="@{file}" regexp="${basedir}/" replace="" casesensitive="false" />
 			<!--propertyregex property="filepath/" input="@{file}" regexp="${basedir}" replace="" casesensitive="false" /-->
 			<!-- Change / for & in filepath to prevent URL / issues -->
 			<!--propertyregex property="filepath" input="${filepath/}" regexp="/" replace="&amp;" casesensitive="false" /-->
