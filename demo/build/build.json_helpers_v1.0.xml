@@ -244,7 +244,7 @@
 			<var name="filename_.pdf" unset="true" />
 			<var name="filename_" unset="true" />
 			<var name="filename" unset="true" />
-			<!--var name="filepath" unset="true" /-->
+			<var name="filepath" unset="true" />
 			<!--var name="filepath/" unset="true" /-->
 
 			<!-- Get just the filename (not full path) and remove web root from filepath -->
