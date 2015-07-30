@@ -1,6 +1,6 @@
 //Clear cache for JSON
-$.ajaxSetup({
-  cache:false
+$(document).ready(function() {
+  $.ajaxSetup({ cache: false });
 });
 
 $(function() {
